@@ -17,7 +17,7 @@ Usage
 require 'vendor/autoload.php';
 
 $gpg = new Certly\GPG\GPG();
-$pubKey = new Certly\GPG\Public_Key($aPublicKey);
+$pubKey = new Certly\GPG\PublicKey($aPublicKey);
 
 echo $gpg->encrypt($pubKey,"ABCDEFGHIJKL");
 ```
