@@ -2,6 +2,8 @@
 
 namespace Certly\GPG;
 
+use Crypto;
+
 /**
  * Class GPG
  * @package Certly\GPG
@@ -118,21 +120,7 @@ class GPG
         $s = base64_decode($public_key);
         $l = floor((ord($s[0]) * 256 + ord($s[1]) + 7) / 8);
         $mod = mpi2b(substr($s, 0, $l + 2));
-        if ($key_type) {
-            $grp = [];
-            $y = [];
-            $B = [];
-            $C = [];
-
-            $l2 = floor((ord($s[$l + 2]) * 256 + ord($s[$l + 3]) + 7) / 8) + 2;
-            $grp = mpi2b(substr($s, $l + 2, $l2));
-            $y = mpi2b(substr($s, $l + 2 + $l2));
-            $exp[0] = $this->keySizes[Utility::c_random() & 7];
-            $B = bmodexp($grp, $exp, $mod);
-            $C = bmodexp($y, $exp, $mod);
-        } else {
-            $exp = mpi2b(substr($s, $l + 2));
-        }
+        $exp = mpi2b(substr($s, $l + 2));
 
         $c = 0;
         $lsk = strlen($session_key);
@@ -147,17 +135,10 @@ class GPG
             chr(7).$session_key.
             chr($c / 256).chr($c & 0xff);
 
-        if ($key_type) {
-            $enc = b2mpi($B).b2mpi(bmod(bmul(mpi2b($m), $C), $mod));
+        $enc = b2mpi(bmodexp(mpi2b($m), $exp, $mod));
 
-            return $this->gpgHeader(0x84, strlen($enc) + 10).
-                chr(3).$key_id.chr(16).$enc;
-        } else {
-            $enc = b2mpi(bmodexp(mpi2b($m), $exp, $mod));
-
-            return $this->gpgHeader(0x84, strlen($enc) + 10).
-                chr(3).$key_id.chr(1).$enc;
-        }
+        return $this->gpgHeader(0x84, strlen($enc) + 10).
+            chr(3).$key_id.chr(1).$enc;
     }
 
     /**
@@ -196,7 +177,6 @@ class GPG
      */
     public function encrypt($pk, $plaintext, $versionHeader = null)
     {
-        // normalize the public key
         $key_id = $pk->GetKeyId();
         $key_type = $pk->GetKeyType();
         $public_key = $pk->GetPublicKey();
@@ -210,7 +190,7 @@ class GPG
         $code = wordwrap($code, 64, "\n", 1);
 
         if ($versionHeader === null) {
-            $versionHeader = 'Version: VerySimple PHP-GPG v'.$this->version."\n\n";
+            $versionHeader = 'Version: PHP-GPG v'.$this->version."\n\n";
         } elseif (safeStrlen($versionHeader) > 0) {
             $versionHeader = 'Version: '.$versionHeader."\n\n";
         }

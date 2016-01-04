@@ -18,11 +18,17 @@ class ExpandedKey
     public $rk;
 
     /**
+     * @var string
+     */
+    public $key;
+
+    /**
      * ExpandedKey constructor.
      * @param $key
      */
     public function __construct($key)
     {
+        $this->key = $key;
         $RCON = Cipher::$RCON;
         $S = Cipher::$S;
 
