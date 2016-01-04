@@ -14,7 +14,7 @@
     ],
 	"autoload": {
 		"psr-4": {
-          "Certly\\GPG\\": "src"
+            "Certly\\GPG\\": "src"
         },
         "files": ["src/globals.php"]
 	},
