@@ -9,20 +9,6 @@ use Certly\GPG\Public_Key;
 class EncryptTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @see PHPUnit_Framework_TestCase::setUp()
-     */
-    public function setUp()
-    {
-    }
-
-    /**
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    public function tearDown()
-    {
-    }
-
-    /**
      * Return a public key used for encryption.
      *
      * @return string PGP public key
