@@ -43,11 +43,11 @@ class GPG
 
         for ($i = 0; $i < $this->width; $i++) {
             $iblock[$i] = 0;
-            $rblock[$i] = GPG_Utility::c_random();
+            $rblock[$i] = Utility::c_random();
         }
 
         for ($n = 0; $n < safeStrlen($text); $n += $this->width) {
-            $iblock = GPG_AES::encrypt($iblock, $ekey);
+            $iblock = AES::encrypt($iblock, $ekey);
             for ($i = 0; $i < $this->width; $i++) {
                 $iblock[$i] ^= ord($text[$n + $i]);
                 $cipher .= chr($iblock[$i]);
@@ -111,7 +111,7 @@ class GPG
             $l2 = floor((ord($s[$l + 2]) * 256 + ord($s[$l + 3]) + 7) / 8) + 2;
             $grp = mpi2b(substr($s, $l + 2, $l2));
             $y = mpi2b(substr($s, $l + 2 + $l2));
-            $exp[0] = $this->keySizes[GPG_Utility::c_random() & 7];
+            $exp[0] = $this->keySizes[Utility::c_random() & 7];
             $B = bmodexp($grp, $exp, $mod);
             $C = bmodexp($y, $exp, $mod);
         } else {
@@ -127,7 +127,7 @@ class GPG
 
         $lm = ($l - 2) * 8 + 2;
         $m = chr($lm / 256).chr($lm % 256).
-            chr(2).GPG_Utility::s_random($l - $lsk - 6, 1)."\0".
+            chr(2).Utility::s_random($l - $lsk - 6, 1)."\0".
             chr(7).$session_key.
             chr($c / 256).chr($c & 0xff);
 
@@ -155,7 +155,7 @@ class GPG
 
     private function gpgData($key, $text)
     {
-        $prefix = GPG_Utility::s_random($this->width, 0);
+        $prefix = Utility::s_random($this->width, 0);
         $prefix .= substr($prefix, -2);
         $mdc = "\xD3\x14".hash('sha1', $prefix.$this->gpgLiteral($text)."\xD3\x14", true);
         $enc = $this->gpgEncrypt($key, $prefix.$this->gpgLiteral($text).$mdc);
@@ -166,7 +166,7 @@ class GPG
     /**
      * Encrypts a message with the provided public key.
      *
-     * @param GPG_Public_Key $pk
+     * @param Public_Key $pk
      * @param string         $plaintext
      * @param string         $versionHeader
      *
@@ -179,8 +179,8 @@ class GPG
         $key_type = $pk->GetKeyType();
         $public_key = $pk->GetPublicKey();
 
-        $session_key = GPG_Utility::s_random($this->width, 0);
-        $key_id = GPG_Utility::hex2bin($key_id);
+        $session_key = Utility::s_random($this->width, 0);
+        $key_id = Utility::hex2bin($key_id);
         $cp = $this->gpgSession($key_id, $key_type, $session_key, $public_key).
         $this->gpgData($session_key, $plaintext);
 
@@ -196,7 +196,7 @@ class GPG
         return
             "-----BEGIN PGP MESSAGE-----\n".
             $versionHeader.
-            $code."\n=".base64_encode(GPG_Utility::crc24($cp)).
+            $code."\n=".base64_encode(Utility::crc24($cp)).
             "\n-----END PGP MESSAGE-----\n";
     }
 }

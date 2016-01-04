@@ -1,6 +1,6 @@
 <?php
 
-namespace Certly\GPG\GPG;
+namespace Certly\GPG;
 
 class Utility
 {

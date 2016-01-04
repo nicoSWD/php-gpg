@@ -1,6 +1,6 @@
 <?php
 
-namespace Certly\GPG\GPG;
+namespace Certly\GPG;
 
 class Cipher
 {
@@ -319,7 +319,7 @@ class Cipher
         $T1 = self::$T1;
 
         return
-        GPG_Utility::B1($T1[$x0 & 0xff]) | (GPG_Utility::B1($T1[($x1 >> 0x8) & 0xff]) << 0x8) |
-            (GPG_Utility::B1($T1[($x2 >> 0x10) & 0xff]) << 0x10) | (GPG_Utility::B1($T1[GPG_Utility::zshift($x3, 0x18)]) << 0x18);
+        Utility::B1($T1[$x0 & 0xff]) | (Utility::B1($T1[($x1 >> 0x8) & 0xff]) << 0x8) |
+            (Utility::B1($T1[($x2 >> 0x10) & 0xff]) << 0x10) | (Utility::B1($T1[Utility::zshift($x3, 0x18)]) << 0x18);
     }
 }

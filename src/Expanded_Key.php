@@ -1,6 +1,6 @@
 <?php
 
-namespace Certly\GPG\GPG;
+namespace Certly\GPG;
 
 class Expanded_Key
 {
@@ -9,11 +9,11 @@ class Expanded_Key
 
     public function __construct($key)
     {
-        $RCON = GPG_Cipher::$RCON;
-        $S = GPG_Cipher::$S;
+        $RCON = Cipher::$RCON;
+        $S = Cipher::$S;
 
-        $maxkc = GPG_Cipher::$maxkc;
-        $maxrk = GPG_Cipher::$maxrk;
+        $maxkc = Cipher::$maxkc;
+        $maxrk = Cipher::$maxrk;
 
         $kc = 0;
         $i = 0;
@@ -70,8 +70,8 @@ class Expanded_Key
         while ($r < $rounds + 1) {
             $temp = $tk[$kc - 1];
 
-            $tk[0] ^= hexdec($S[GPG_Utility::B1($temp)]) | (hexdec($S[GPG_Utility::B2($temp)]) << 0x8) |
-                (hexdec($S[GPG_Utility::B3($temp)]) << 0x10) | (hexdec($S[GPG_Utility::B0($temp)]) << 0x18);
+            $tk[0] ^= hexdec($S[Utility::B1($temp)]) | (hexdec($S[Utility::B2($temp)]) << 0x8) |
+                (hexdec($S[Utility::B3($temp)]) << 0x10) | (hexdec($S[Utility::B0($temp)]) << 0x18);
             $tk[0] ^= $RCON[$rconpointer++];
 
             if ($kc != 8) {
@@ -84,8 +84,8 @@ class Expanded_Key
                 }
 
                 $temp = $tk[$kc / 2 - 1];
-                $tk[$kc / 2] ^= hexdec($S[GPG_Utility::B0($temp)]) | (hexdec($S[GPG_Utility::B1($temp)]) << 0x8) |
-                    (hexdec($S[GPG_Utility::B2($temp)] << 0x10)) | (hexdec($S[GPG_Utility::B3($temp)]) << 0x18);
+                $tk[$kc / 2] ^= hexdec($S[Utility::B0($temp)]) | (hexdec($S[Utility::B1($temp)]) << 0x8) |
+                    (hexdec($S[Utility::B2($temp)] << 0x10)) | (hexdec($S[Utility::B3($temp)]) << 0x18);
 
                 for ($j = $kc / 2 + 1; $j < $kc; $j++) {
                     $tk[$j] ^= $tk[$j - 1];

@@ -1,14 +1,7 @@
 <?php
-/**
- */
-/* ensure the framework libraries can be located */
-set_include_path(
-        realpath('../src').
-        PATH_SEPARATOR.get_include_path()
-);
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'GPG.php';
+use Certly\GPG\GPG;
+use Certly\GPG\Public_Key;
 
 /**
  * 
@@ -121,7 +114,7 @@ Farm-to-table actually Portland, artisan shabby chic vinyl organic seitan roof p
 Flannel sriracha XOXO, slow-carb Godard ennui tousled American Apparel street art drinking vinegar lo-fi blog. Whatever Intelligentsia cardigan, Pinterest PBR&B pop-up semiotics. Jean shorts chillwave semiotics biodiesel. McSweeney's fap cardigan messenger bag fanny pack Cosby sweater Odd Future, Pitchfork four loko Marfa keytar mlkshk. 3 wolf moon McSweeney's gluten-free, umami freegan biodiesel fingerstache aesthetic sriracha swag Echo Park. Shabby chic selfies fixie, art party XOXO four loko chambray post-ironic letterpress messenger bag. Mustache beard lo-fi, flexitarian artisan tofu freegan occupy kale chips Carles twee chia bespoke.";
 
         $gpg = new GPG();
-        $pub_key = new GPG_Public_Key($public_key_ascii);
+        $pub_key = new Public_Key($public_key_ascii);
         $encrypted = $gpg->encrypt($pub_key, $plain_text_string);
 
         $this->assertContains('-----BEGIN PGP MESSAGE-----', $encrypted, 'PGP Header Expected');
