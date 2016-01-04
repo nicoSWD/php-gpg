@@ -2,9 +2,6 @@
 
 namespace Certly\GPG;
 
-use Certly\GPG\Cipher;
-use Certly\GPG\Utility;
-
 class AES
 {
     public static function encrypt($block, $ctx)

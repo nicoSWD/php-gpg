@@ -167,8 +167,8 @@ class GPG
      * Encrypts a message with the provided public key.
      *
      * @param Public_Key $pk
-     * @param string         $plaintext
-     * @param string         $versionHeader
+     * @param string     $plaintext
+     * @param string     $versionHeader
      *
      * @return string encrypted text
      */

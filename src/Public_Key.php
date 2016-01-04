@@ -4,9 +4,9 @@ namespace Certly\GPG;
 
 use Exception;
 
-define("PK_TYPE_ELGAMAL", 1);
-define("PK_TYPE_RSA", 0);
-define("PK_TYPE_UNKNOWN", -1);
+define('PK_TYPE_ELGAMAL', 1);
+define('PK_TYPE_RSA', 0);
+define('PK_TYPE_UNKNOWN', -1);
 
 class Public_Key
 {
