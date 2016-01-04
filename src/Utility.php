@@ -2,33 +2,63 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class Utility
+ * @package Certly\GPG
+ */
 class Utility
 {
+    /**
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
     public static function starts_with($haystack, $needle)
     {
         return $needle === '' || strpos($haystack, $needle) === 0;
     }
 
+    /**
+     * @param $x
+     * @return int
+     */
     public static function B0($x)
     {
         return $x & 0xff;
     }
 
+    /**
+     * @param $x
+     * @return int
+     */
     public static function B1($x)
     {
         return ($x >> 0x8) & 0xff;
     }
 
+    /**
+     * @param $x
+     * @return int
+     */
     public static function B2($x)
     {
         return ($x >> 0x10) & 0xff;
     }
 
+    /**
+     * @param $x
+     * @return int
+     */
     public static function B3($x)
     {
         return ($x >> 0x18) & 0xff;
     }
 
+    /**
+     * @param $x
+     * @param $s
+     * @return int
+     */
     public static function zshift($x, $s)
     {
         $res = $x >> $s;
@@ -41,6 +71,10 @@ class Utility
         return $res & $pad;
     }
 
+    /**
+     * @param $octets
+     * @return array|void
+     */
     public static function pack_octets($octets)
     {
         $i = 0;
@@ -59,6 +93,10 @@ class Utility
         return $b;
     }
 
+    /**
+     * @param $packed
+     * @return array
+     */
     public static function unpack_octets($packed)
     {
         $j = 0;
@@ -76,6 +114,10 @@ class Utility
         return $r;
     }
 
+    /**
+     * @param $h
+     * @return string
+     */
     public static function hex2bin($h)
     {
         if (strlen($h) % 2) {
@@ -90,6 +132,10 @@ class Utility
         return $r;
     }
 
+    /**
+     * @param $data
+     * @return string
+     */
     public static function crc24($data)
     {
         $crc = 0xb704ce;
@@ -110,6 +156,11 @@ class Utility
             chr($crc & 0xff);
     }
 
+    /**
+     * @param $len
+     * @param $textmode
+     * @return string
+     */
     public static function s_random($len, $textmode)
     {
         $r = '';
@@ -126,6 +177,9 @@ class Utility
         return $r;
     }
 
+    /**
+     * @return int
+     */
     public static function c_random()
     {
         return random_int(0, 0xff);

@@ -2,11 +2,26 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class BDiv
+ * @package Certly\GPG
+ */
 class BDiv
 {
+    /**
+     * @var array
+     */
     public $q;
+    /**
+     * @var array
+     */
     public $mod;
 
+    /**
+     * BDiv constructor.
+     * @param $x
+     * @param $y
+     */
     public function __construct($x, $y)
     {
         global $bs;

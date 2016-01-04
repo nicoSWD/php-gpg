@@ -369,6 +369,10 @@ function bmul($a, $b)
     return array_slice($r, 0, $n);
 }
 
+/**
+ * @param $string
+ * @return int
+ */
 function safeStrlen($string)
 {
     if (function_exists('mb_strlen')) {

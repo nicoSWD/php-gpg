@@ -2,6 +2,10 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class GPG
+ * @package Certly\GPG
+ */
 class GPG
 {
     /**
@@ -82,6 +86,11 @@ class GPG
         return $h;
     }
 
+    /**
+     * @param $n
+     * @param $bytes
+     * @return string
+     */
     private function writeNumber($n, $bytes)
     {
         // credits for this function go to OpenPGP.js
@@ -93,6 +102,13 @@ class GPG
         return $b;
     }
 
+    /**
+     * @param $key_id
+     * @param $key_type
+     * @param $session_key
+     * @param $public_key
+     * @return string
+     */
     private function gpgSession($key_id, $key_type, $session_key, $public_key)
     {
         $mod = [];
@@ -144,6 +160,10 @@ class GPG
         }
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
     private function gpgLiteral($text)
     {
         if (strpos($text, "\r\n") === false) {
@@ -153,6 +173,11 @@ class GPG
         return chr(11 | 0xC0).chr(255).$this->writeNumber(safeStrlen($text) + 10, 4).'t'.chr(4)."file\0\0\0\0".$text;
     }
 
+    /**
+     * @param $key
+     * @param $text
+     * @return string
+     */
     private function gpgData($key, $text)
     {
         $prefix = Utility::s_random($this->width, 0);
@@ -164,13 +189,10 @@ class GPG
     }
 
     /**
-     * Encrypts a message with the provided public key.
-     *
-     * @param PublicKey $pk
-     * @param string     $plaintext
-     * @param string     $versionHeader
-     *
-     * @return string encrypted text
+     * @param $pk
+     * @param $plaintext
+     * @param null $versionHeader
+     * @return string
      */
     public function encrypt($pk, $plaintext, $versionHeader = null)
     {

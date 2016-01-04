@@ -2,11 +2,25 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class ExpandedKey
+ * @package Certly\GPG
+ */
 class ExpandedKey
 {
+    /**
+     * @var int
+     */
     public $rounds;
+    /**
+     * @var array
+     */
     public $rk;
 
+    /**
+     * ExpandedKey constructor.
+     * @param $key
+     */
     public function __construct($key)
     {
         $RCON = Cipher::$RCON;

@@ -2,8 +2,17 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class AES
+ * @package Certly\GPG
+ */
 class AES
 {
+    /**
+     * @param $block
+     * @param $ctx
+     * @return array
+     */
     public static function encrypt($block, $ctx)
     {
         $RCON = Cipher::$RCON;

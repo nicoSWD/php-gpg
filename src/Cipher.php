@@ -2,6 +2,10 @@
 
 namespace Certly\GPG;
 
+/**
+ * Class Cipher
+ * @package Certly\GPG
+ */
 class Cipher
 {
     /*
@@ -16,9 +20,18 @@ class Cipher
     global $maxrk;
     */
 
+    /**
+     * @var int
+     */
     public static $maxkc = 8;
+    /**
+     * @var int
+     */
     public static $maxrk = 14;
 
+    /**
+     * @var array
+     */
     public static $RCON = [
             0x01, 0x02, 0x04, 0x08, 0x10, 0x20,
             0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8,
@@ -27,6 +40,9 @@ class Cipher
             0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91,
             ];
 
+    /**
+     * @var array
+     */
     public static $S = [
             '63', '7C', '77', '7B', 'F2', '6B', '6F', 'C5', '30', '01', '67', '2B', 'FE', 'D7', 'AB', '76',
             'CA', '82', 'C9', '7D', 'FA', '59', '47', 'F0', 'AD', 'D4', 'A2', 'AF', '9C', 'A4', '72', 'C0',
@@ -46,6 +62,9 @@ class Cipher
             '8C', 'A1', '89', '0D', 'BF', 'E6', '42', '68', '41', '99', '2D', '0F', 'B0', '54', 'BB', '16',
             ];
 
+    /**
+     * @var array
+     */
     public static $T1 = [
             0xa56363c6, 0x847c7cf8, 0x997777ee, 0x8d7b7bf6,
             0x0df2f2ff, 0xbd6b6bd6, 0xb16f6fde, 0x54c5c591,
@@ -113,6 +132,9 @@ class Cipher
             0xcbb0b07b, 0xfc5454a8, 0xd6bbbb6d, 0x3a16162c,
             ];
 
+    /**
+     * @var array
+     */
     public static $T2 = [
             0x6363c6a5, 0x7c7cf884, 0x7777ee99, 0x7b7bf68d,
             0xf2f2ff0d, 0x6b6bd6bd, 0x6f6fdeb1, 0xc5c59154,
@@ -180,6 +202,9 @@ class Cipher
             0xb0b07bcb, 0x5454a8fc, 0xbbbb6dd6, 0x16162c3a,
             ];
 
+    /**
+     * @var array
+     */
     public static $T3 = [
             0x63c6a563, 0x7cf8847c, 0x77ee9977, 0x7bf68d7b,
             0xf2ff0df2, 0x6bd6bd6b, 0x6fdeb16f, 0xc59154c5,
@@ -247,6 +272,9 @@ class Cipher
             0xb07bcbb0, 0x54a8fc54, 0xbb6dd6bb, 0x162c3a16,
             ];
 
+    /**
+     * @var array
+     */
     public static $T4 = [
             0xc6a56363, 0xf8847c7c, 0xee997777, 0xf68d7b7b,
             0xff0df2f2, 0xd6bd6b6b, 0xdeb16f6f, 0x9154c5c5,
@@ -314,6 +342,13 @@ class Cipher
             0x7bcbb0b0, 0xa8fc5454, 0x6dd6bbbb, 0x2c3a1616,
             ];
 
+    /**
+     * @param $x0
+     * @param $x1
+     * @param $x2
+     * @param $x3
+     * @return int
+     */
     public static function F1($x0, $x1, $x2, $x3)
     {
         $T1 = self::$T1;

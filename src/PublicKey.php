@@ -4,23 +4,62 @@ namespace Certly\GPG;
 
 use Exception;
 
+/**
+ *
+ */
 define('PK_TYPE_RSA', 0);
+/**
+ *
+ */
 define('PK_TYPE_UNKNOWN', -1);
 
+/**
+ * Class PublicKey
+ * @package Certly\GPG
+ */
 class PublicKey
 {
+    /**
+     * @var int
+     */
     public $version;
+
+    /**
+     * @var string
+     */
     public $fp;
+
+    /**
+     * @var string
+     */
     public $key_id;
+
+    /**
+     * @var string
+     */
     public $user;
+
+    /**
+     * @var string
+     */
     public $public_key;
+
+    /**
+     * @var string
+     */
     public $type;
 
+    /**
+     * @return bool
+     */
     public function IsValid()
     {
         return $this->version != -1 && $this->GetKeyType() != PK_TYPE_UNKNOWN;
     }
 
+    /**
+     * @return int
+     */
     public function GetKeyType()
     {
         if (!strcmp($this->type, 'RSA')) {
@@ -30,21 +69,34 @@ class PublicKey
         return PK_TYPE_UNKNOWN;
     }
 
+    /**
+     * @return string
+     */
     public function GetFingerprint()
     {
         return strtoupper(trim(chunk_split($this->fp, 4, ' ')));
     }
 
+    /**
+     * @return string
+     */
     public function GetKeyId()
     {
         return (strlen($this->key_id) == 16) ? strtoupper($this->key_id) : '0000000000000000';
     }
 
+    /**
+     * @return mixed
+     */
     public function GetPublicKey()
     {
         return str_replace("\n", '', $this->public_key);
     }
 
+    /**
+     * PublicKey constructor.
+     * @param $asc
+     */
     public function __construct($asc)
     {
         $found = 0;
@@ -244,6 +296,9 @@ class PublicKey
         }
     }
 
+    /**
+     *
+     */
     public function GetExpandedKey()
     {
         $ek = new ExpandedKey($this->public_key);
