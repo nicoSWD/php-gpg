@@ -7,7 +7,7 @@ use Exception;
 define('PK_TYPE_RSA', 0);
 define('PK_TYPE_UNKNOWN', -1);
 
-class Public_Key
+class PublicKey
 {
     public $version;
     public $fp;
@@ -246,6 +246,6 @@ class Public_Key
 
     public function GetExpandedKey()
     {
-        $ek = new Expanded_Key($this->public_key);
+        $ek = new ExpandedKey($this->public_key);
     }
 }

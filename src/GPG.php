@@ -39,7 +39,7 @@ class GPG
             }
         }
 
-        $ekey = new Expanded_Key($key);
+        $ekey = new ExpandedKey($key);
 
         for ($i = 0; $i < $this->width; $i++) {
             $iblock[$i] = 0;
@@ -166,7 +166,7 @@ class GPG
     /**
      * Encrypts a message with the provided public key.
      *
-     * @param Public_Key $pk
+     * @param PublicKey $pk
      * @param string     $plaintext
      * @param string     $versionHeader
      *

@@ -1,7 +1,7 @@
 <?php
 
 use Certly\GPG\GPG;
-use Certly\GPG\Public_Key;
+use Certly\GPG\PublicKey;
 
 /**
  * 
@@ -119,7 +119,7 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
         $public_key_ascii = $this->getGnuPGTestKey();
 
         $gpg = new GPG();
-        $pub_key = new Public_Key($public_key_ascii);
+        $pub_key = new PublicKey($public_key_ascii);
 
         $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
         $this->assertEquals('47009B66424E9476', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');
@@ -135,7 +135,7 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
         $public_key_ascii = $this->getOpenPGPTestKey2();
 
         $gpg = new GPG();
-        $pub_key = new Public_Key($public_key_ascii);
+        $pub_key = new PublicKey($public_key_ascii);
 
         $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
         $this->assertEquals('C87538697986219A', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');

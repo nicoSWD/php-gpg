@@ -2,7 +2,7 @@
 
 namespace Certly\GPG;
 
-class Expanded_Key
+class ExpandedKey
 {
     public $rounds;
     public $rk;
