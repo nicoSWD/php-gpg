@@ -13,29 +13,6 @@ class KeyTest extends PHPUnit_Framework_TestCase
      *
      * @return string PGP public key
      */
-    public function getOpenPGPTestKey1()
-    {
-        return '-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: OpenPGP.js v.1.20140106
-Comment: http://openpgpjs.org
-
-xo0EUsvlVAEEAJN0OBFbVM21z3OzG9DDCohpaF9+rWUyCreRIDC+Cou9680f
-t8v5m9B0+BTM2OVEB3uK7QbcWhsPkfpn7zW9YntStSXI5ESC+eAhNGbAKnvq
-32MadP7DbwRUrtcldSEd2B6uI/embnmv1CBkmrTAh0MiKscHPh5xrxwcxLLJ
-TQstABEBAAHNF1Rlc3QgPHRlc3RAZXhhbXBsZS5jb20+wpwEEAEIABAFAlLL
-5VUJEI3OSY9gkd/WAAAgKwP/TUeVmXMS3YYvTLC0tRw/Ae1M4sNduvuKcza2
-4l6iuiIhXHntL9u5pQERcyhzL171DsR1S3EUj/nIFpfqN8OWOuj0Wqt3H4F9
-igkfsrJr68qHEQztSXRufP/jv7OX+0EF+ve0+IFa6r5LPRmibl0qta522gHd
-2LVudfBDDi0Y6k4=
-=JjPg
------END PGP PUBLIC KEY BLOCK-----';
-    }
-
-    /**
-     * Return a public key used for encryption.
-     *
-     * @return string PGP public key
-     */
     public function getOpenPGPTestKey2()
     {
         return '-----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -147,22 +124,6 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
         $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
         $this->assertEquals('47009B66424E9476', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');
         $this->assertEquals('ED4F E89E 38A3 7833 3CD4 D6FA 4700 9B66 424E 9476', $pub_key->GetFingerprint(), 'OpenPGP Incorrect Fingerprint');
-    }
-
-    /**
-     * Test key ID.
-     */
-    public function test_VerifyOpenPGPKey1()
-    {
-        // OpenPGP Test Key
-        $public_key_ascii = $this->getOpenPGPTestKey1();
-
-        $gpg = new GPG();
-        $pub_key = new Public_Key($public_key_ascii);
-
-        $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
-        $this->assertEquals('8DCE498F6091DFD6', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');
-        $this->assertEquals('C893 35AC EDF1 6046 7534 B25E 8DCE 498F 6091 DFD6', $pub_key->GetFingerprint(), 'OpenPGP Incorrect Fingerprint');
     }
 
     /**

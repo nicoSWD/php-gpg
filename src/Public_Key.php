@@ -4,7 +4,6 @@ namespace Certly\GPG;
 
 use Exception;
 
-define('PK_TYPE_ELGAMAL', 1);
 define('PK_TYPE_RSA', 0);
 define('PK_TYPE_UNKNOWN', -1);
 
@@ -24,9 +23,6 @@ class Public_Key
 
     public function GetKeyType()
     {
-        if (!strcmp($this->type, 'ELGAMAL')) {
-            return PK_TYPE_ELGAMAL;
-        }
         if (!strcmp($this->type, 'RSA')) {
             return PK_TYPE_RSA;
         }
