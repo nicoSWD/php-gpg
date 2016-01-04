@@ -1,15 +1,20 @@
 {
-    "name": "jasonhinkle/php-gpg",
-    "description": "GPG / PGP port written in pure PHP with no binary dependencies",
+    "name": "certly/gpg",
+    "description": "Pure PHP GPG implementation, forked from php-gpg.",
     "type": "library",
     "keywords": ["gpg"],
     "license": "GPL",
     "authors": [
-        {
-            "name": "Jason Hinkle"
-        }
+      {
+        "name": "Jason Hinkle"
+      },
+      {
+        "name": "Ian Carroll"
+      }
     ],
 	"autoload": {
-		"classmap": ["libs/GPG.php"]
+		"psr-4": {
+          "Certly\\GPG\\": "src"
+        }
 	}
 }

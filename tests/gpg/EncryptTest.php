@@ -4,7 +4,7 @@
  */
 /* ensure the framework libraries can be located */
 set_include_path(
-		realpath("../libs") .
+		realpath("../src") .
 		PATH_SEPARATOR . get_include_path()
 );
 
