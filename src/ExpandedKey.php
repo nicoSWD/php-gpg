@@ -119,7 +119,5 @@ class ExpandedKey
 
         $this->rounds = $rounds;
         $this->rk = $keySched;
-
-        return $this;
     }
 }

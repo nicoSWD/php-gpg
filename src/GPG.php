@@ -21,7 +21,7 @@ class GPG
     /**
      * @var string
      */
-    private $version = '1.6.1';
+    private $version = '1.0.0';
 
     /**
      * @param $key
