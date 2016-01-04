@@ -5,19 +5,19 @@
     "keywords": ["gpg"],
     "license": "GPL",
     "authors": [
-		{
-			"name": "Jason Hinkle"
-		},
-		{
-			"name": "Ian Carroll"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-	    "Certly\\GPG\\": "src"
-	},
-	"files": ["src/globals.php"]
-	},
+        {
+        "name": "Jason Hinkle"
+        },
+        {
+        "name": "Ian Carroll"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Certly\\GPG\\": "src"
+        },
+        "files": ["src/globals.php"]
+    },
     "require-dev": {
         "phpunit/phpunit": "^5.1"
     },
