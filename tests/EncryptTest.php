@@ -4,14 +4,13 @@ use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
 /**
- * 
+ * Class EncryptTest
  */
 class EncryptTest extends PHPUnit_Framework_TestCase
 {
+
     /**
-     * Return a public key used for encryption.
-     *
-     * @return string PGP public key
+     * @return string
      */
     public function getTestKey()
     {
@@ -83,7 +82,7 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
     }
 
     /**
-     * Test that basic encryption returns a valid encrypted message.
+     *
      */
     public function test_Encrypt()
     {

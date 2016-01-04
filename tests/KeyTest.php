@@ -4,14 +4,12 @@ use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
 /**
- * 
+ * Class KeyTest
  */
 class KeyTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Return a public key used for encryption.
-     *
-     * @return string PGP public key
+     * @return string
      */
     public function getOpenPGPTestKey2()
     {
@@ -37,9 +35,7 @@ FHAUVqBD8zTkqmjdk9LZ6GnF6tuKRAWS59qU7y4+fchP58dhjep0mIFa6FQ=
     }
 
     /**
-     * Return a public key used for encryption.
-     *
-     * @return string PGP public key
+     * @return string
      */
     public function getGnuPGTestKey()
     {
@@ -111,7 +107,7 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
     }
 
     /**
-     * Test key ID.
+     *
      */
     public function test_VerifyGnuPGKey()
     {
@@ -127,7 +123,7 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
     }
 
     /**
-     * Test key ID.
+     *
      */
     public function test_VerifyOpenPGPKey2()
     {
