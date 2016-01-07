@@ -120,16 +120,7 @@ class Utility
      */
     public static function hex2bin($h)
     {
-        if (strlen($h) % 2) {
-            $h += '0';
-        }
-
-        $r = '';
-        for ($i = 0; $i < strlen($h); $i += 2) {
-            $r .= chr(intval($h[$i], 16) * 16 + intval($h[$i + 1], 16));
-        }
-
-        return $r;
+        return hex2bin($h);
     }
 
     /**
