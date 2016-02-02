@@ -1,3 +1,3 @@
 <?php
 
-return new Sami\Sami(__DIR__ . "/src");
+return new Sami\Sami(__DIR__.'/src');

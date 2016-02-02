@@ -3,8 +3,7 @@
 namespace Certly\GPG;
 
 /**
- * Class ExpandedKey
- * @package Certly\GPG
+ * Class ExpandedKey.
  */
 class ExpandedKey
 {
@@ -24,6 +23,7 @@ class ExpandedKey
 
     /**
      * ExpandedKey constructor.
+     *
      * @param $key
      */
     public function __construct($key)

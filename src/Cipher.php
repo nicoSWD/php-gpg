@@ -3,8 +3,7 @@
 namespace Certly\GPG;
 
 /**
- * Class Cipher
- * @package Certly\GPG
+ * Class Cipher.
  */
 class Cipher
 {
@@ -347,6 +346,7 @@ class Cipher
      * @param $x1
      * @param $x2
      * @param $x3
+     *
      * @return int
      */
     public static function F1($x0, $x1, $x2, $x3)

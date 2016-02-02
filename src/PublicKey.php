@@ -4,18 +4,17 @@ namespace Certly\GPG;
 
 use Exception;
 
-/**
+/*
  *
  */
 define('PK_TYPE_RSA', 0);
-/**
+/*
  *
  */
 define('PK_TYPE_UNKNOWN', -1);
 
 /**
- * Class PublicKey
- * @package Certly\GPG
+ * Class PublicKey.
  */
 class PublicKey
 {
@@ -95,6 +94,7 @@ class PublicKey
 
     /**
      * PublicKey constructor.
+     *
      * @param $asc
      */
     public function __construct($asc)

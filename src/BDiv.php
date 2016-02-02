@@ -3,8 +3,7 @@
 namespace Certly\GPG;
 
 /**
- * Class BDiv
- * @package Certly\GPG
+ * Class BDiv.
  */
 class BDiv
 {
@@ -19,6 +18,7 @@ class BDiv
 
     /**
      * BDiv constructor.
+     *
      * @param $x
      * @param $y
      */

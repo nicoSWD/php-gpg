@@ -3,14 +3,14 @@
 namespace Certly\GPG;
 
 /**
- * Class Utility
- * @package Certly\GPG
+ * Class Utility.
  */
 class Utility
 {
     /**
      * @param $haystack
      * @param $needle
+     *
      * @return bool
      */
     public static function starts_with($haystack, $needle)
@@ -20,6 +20,7 @@ class Utility
 
     /**
      * @param $x
+     *
      * @return int
      */
     public static function B0($x)
@@ -29,6 +30,7 @@ class Utility
 
     /**
      * @param $x
+     *
      * @return int
      */
     public static function B1($x)
@@ -38,6 +40,7 @@ class Utility
 
     /**
      * @param $x
+     *
      * @return int
      */
     public static function B2($x)
@@ -47,6 +50,7 @@ class Utility
 
     /**
      * @param $x
+     *
      * @return int
      */
     public static function B3($x)
@@ -57,6 +61,7 @@ class Utility
     /**
      * @param $x
      * @param $s
+     *
      * @return int
      */
     public static function zshift($x, $s)
@@ -73,6 +78,7 @@ class Utility
 
     /**
      * @param $octets
+     *
      * @return array|void
      */
     public static function pack_octets($octets)
@@ -95,6 +101,7 @@ class Utility
 
     /**
      * @param $packed
+     *
      * @return array
      */
     public static function unpack_octets($packed)
@@ -116,6 +123,7 @@ class Utility
 
     /**
      * @param $h
+     *
      * @return string
      */
     public static function hex2bin($h)
@@ -134,6 +142,7 @@ class Utility
 
     /**
      * @param $data
+     *
      * @return string
      */
     public static function crc24($data)
@@ -159,6 +168,7 @@ class Utility
     /**
      * @param $len
      * @param $textmode
+     *
      * @return string
      */
     public static function s_random($len, $textmode)

@@ -3,14 +3,14 @@
 namespace Certly\GPG;
 
 /**
- * Class AES
- * @package Certly\GPG
+ * Class AES.
  */
 class AES
 {
     /**
      * @param $block
      * @param $ctx
+     *
      * @return array
      */
     public static function encrypt($block, $ctx)

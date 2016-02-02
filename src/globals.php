@@ -2,7 +2,7 @@
 
 use Certly\GPG\BDiv;
 
-/** assign globals */
+/* assign globals */
 global $bs;
 global $bx2;
 global $bm;
@@ -19,6 +19,7 @@ $bdm = (1 << $bd) - 1;
 
 /**
  * @param $s
+ *
  * @return array|int
  */
 function mpi2b($s)
@@ -70,6 +71,7 @@ function mpi2b($s)
 
 /**
  * @param $b
+ *
  * @return string
  */
 function b2mpi($b)
@@ -130,6 +132,7 @@ function b2mpi($b)
  * @param $xx
  * @param $y
  * @param $m
+ *
  * @return array
  */
 function bmodexp($xx, $y, $m)
@@ -170,6 +173,7 @@ function bmodexp($xx, $y, $m)
 /**
  * @param $i
  * @param $m
+ *
  * @return int
  */
 function simplemod($i, $m) // returns the mod where m < 2^bd
@@ -188,6 +192,7 @@ function simplemod($i, $m) // returns the mod where m < 2^bd
 /**
  * @param $p
  * @param $m
+ *
  * @return array
  */
 function bmod($p, $m) // binary modulo
@@ -212,6 +217,7 @@ function bmod($p, $m) // binary modulo
  * @param $x
  * @param $m
  * @param $mu
+ *
  * @return array
  */
 function bmod2($x, $m, $mu)
@@ -252,6 +258,7 @@ function bmod2($x, $m, $mu)
  * @param $x
  * @param $start
  * @param $len
+ *
  * @return int
  */
 function toppart($x, $start, $len)
@@ -268,6 +275,7 @@ function toppart($x, $start, $len)
 
 /**
  * @param $n
+ *
  * @return array
  */
 function zeros($n)
@@ -283,6 +291,7 @@ function zeros($n)
 /**
  * @param $a
  * @param $b
+ *
  * @return array
  */
 function bsub($a, $b)
@@ -339,6 +348,7 @@ function bsub($a, $b)
 /**
  * @param $a
  * @param $b
+ *
  * @return array
  */
 function bmul($a, $b)
@@ -401,6 +411,7 @@ function bmul($a, $b)
 
 /**
  * @param $string
+ *
  * @return int
  */
 function safeStrlen($string)
