@@ -4,7 +4,7 @@ use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
 /**
- * Class KeyTest
+ * Class KeyTest.
  */
 class KeyTest extends PHPUnit_Framework_TestCase
 {

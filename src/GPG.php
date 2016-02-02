@@ -2,11 +2,8 @@
 
 namespace Certly\GPG;
 
-use Crypto;
-
 /**
- * Class GPG
- * @package Certly\GPG
+ * Class GPG.
  */
 class GPG
 {
@@ -91,6 +88,7 @@ class GPG
     /**
      * @param $n
      * @param $bytes
+     *
      * @return string
      */
     private function writeNumber($n, $bytes)
@@ -109,6 +107,7 @@ class GPG
      * @param $key_type
      * @param $session_key
      * @param $public_key
+     *
      * @return string
      */
     private function gpgSession($key_id, $key_type, $session_key, $public_key)
@@ -143,6 +142,7 @@ class GPG
 
     /**
      * @param $text
+     *
      * @return string
      */
     private function gpgLiteral($text)
@@ -157,6 +157,7 @@ class GPG
     /**
      * @param $key
      * @param $text
+     *
      * @return string
      */
     private function gpgData($key, $text)
@@ -173,6 +174,7 @@ class GPG
      * @param $pk
      * @param $plaintext
      * @param null $versionHeader
+     *
      * @return string
      */
     public function encrypt($pk, $plaintext, $versionHeader = null)

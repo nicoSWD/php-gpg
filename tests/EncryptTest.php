@@ -4,11 +4,10 @@ use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
 /**
- * Class EncryptTest
+ * Class EncryptTest.
  */
 class EncryptTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return string
      */
@@ -41,8 +40,8 @@ RtMRSAL/PdpISDpv0WgQzbjnlxZmRvCvwAxXnXl4Pa2A
         $public_key_ascii = $this->getTestKey();
         $gpg = new GPG();
         $pub_key = new PublicKey($public_key_ascii);
-        $encrypted = $gpg->encrypt($pub_key, "ABCDEF");
-        $this->assertContains("-----BEGIN PGP MESSAGE-----", $encrypted);
-        $this->assertContains("-----END PGP MESSAGE-----", $encrypted);
+        $encrypted = $gpg->encrypt($pub_key, 'ABCDEF');
+        $this->assertContains('-----BEGIN PGP MESSAGE-----', $encrypted);
+        $this->assertContains('-----END PGP MESSAGE-----', $encrypted);
     }
 }
