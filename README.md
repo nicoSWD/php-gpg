@@ -1,6 +1,6 @@
 php-gpg
 =======
-This is a fork of the fork because everything still sucks.
+This is a fork of the fork because everything still sucks. All unacceptable.
 
 Features/Limitations
 --------------------
