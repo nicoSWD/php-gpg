@@ -71,7 +71,9 @@ class GPG
             $rblock[$i] = Utility::c_random();
         }
 
-        for ($n = 0; $n < safeStrlen($text); $n += $this->width) {
+        $strLen = safeStrlen($text);
+
+        for ($n = 0; $n < $strLen; $n += $this->width) {
             $iblock = AES::encrypt($iblock, $ekey);
             for ($i = 0; $i < $this->width; $i++) {
                 $iblock[$i] ^= ord($text[$n + $i]);

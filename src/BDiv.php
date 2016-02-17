@@ -102,7 +102,7 @@ class BDiv
             $x2 = bsub($x, bmul([$q[$m]], $y2));
             if (count($x2) == 0) {
                 $q[$m]--;
-                $x2 = bsub($x, bmul([$q[m]], $y2));
+                $x2 = bsub($x, bmul([$q[$m]], $y2));
             }
             $x = $x2;
         }
