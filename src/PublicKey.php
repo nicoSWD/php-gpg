@@ -4,18 +4,9 @@ namespace Certly\GPG;
 
 use Exception;
 
-/*
- *
- */
 define('PK_TYPE_RSA', 0);
-/*
- *
- */
 define('PK_TYPE_UNKNOWN', -1);
 
-/**
- * Class PublicKey.
- */
 class PublicKey
 {
     /**
@@ -53,13 +44,13 @@ class PublicKey
      */
     public function IsValid()
     {
-        return $this->version != -1 && $this->GetKeyType() != PK_TYPE_UNKNOWN;
+        return $this->version != -1 && $this->getKeyType() != PK_TYPE_UNKNOWN;
     }
 
     /**
      * @return int
      */
-    public function GetKeyType()
+    public function getKeyType()
     {
         if (!strcmp($this->type, 'RSA')) {
             return PK_TYPE_RSA;
@@ -79,7 +70,7 @@ class PublicKey
     /**
      * @return string
      */
-    public function GetKeyId()
+    public function getKeyId()
     {
         return (strlen($this->key_id) == 16) ? strtoupper($this->key_id) : '0000000000000000';
     }
@@ -87,15 +78,14 @@ class PublicKey
     /**
      * @return mixed
      */
-    public function GetPublicKey()
+    public function getPublicKey()
     {
         return str_replace("\n", '', $this->public_key);
     }
 
     /**
-     * PublicKey constructor.
-     *
      * @param $asc
+     * @throws Exception
      */
     public function __construct($asc)
     {
@@ -120,14 +110,11 @@ class PublicKey
         $headerbody = explode("\n\n", str_replace("\n-----END PGP PUBLIC KEY BLOCK-----", '', $asc), 2);
         $asc = trim($headerbody[1]);
 
-        $len = 0;
         $s = base64_decode($asc);
         $sa = str_split($s);
 
         for ($i = 0; $i < strlen($s);) {
             $tag = ord($sa[$i++]);
-
-            // echo 'TAG=' . $tag . '/';
 
             if (($tag & 128) == 0) {
                 break;
@@ -179,24 +166,20 @@ class PublicKey
                     } else {
                         $len += (0);
                     }
-                    // $len = (ord($sa[$i++])* pow(2,24)) + (ord($sa[$i++]) * pow(2,16)) + (0 * pow(2,8)) + 0;
                 } else {
                     $len = strlen($s) - 1;
                 }
             }
-
-            // echo $tag . ' ';
 
             if ($tag == 6 || $tag == 14) {
                 $k = $i;
                 $version = ord($sa[$i++]);
                 $found = 1;
                 $this->version = $version;
-
-                $time = (ord($sa[$i++]) << 24) + (ord($sa[$i++]) << 16) + (ord($sa[$i++]) << 8) + ord($sa[$i++]);
+                $i += 4;
 
                 if ($version == 2 || $version == 3) {
-                    $valid = ord($sa[$i++]) << 8 + ord($sa[$i++]);
+                    $i += 2;
                 }
 
                 $algo = ord($sa[$i++]);
@@ -220,7 +203,7 @@ class PublicKey
 
                         // https://tools.ietf.org/html/rfc4880#section-12
                         $headerPos = strpos($s, chr(0x04));  // TODO: is this always the correct starting point for the pulic key packet 'version' field?
-                        $delim = chr(0x01).chr(0x00);  // TODO: is this the correct delimiter for the end of the public key packet?
+                        $delim = chr(0x01) . chr(0x00);  // TODO: is this the correct delimiter for the end of the public key packet?
                         $delimPos = strpos($s, $delim) + (3 - $headerPos);
 
                         // echo "POSITION: $delimPos\n";
@@ -229,7 +212,7 @@ class PublicKey
                         // $pkt = chr(0x99) . chr($delimPos >> 8) . chr($delimPos & 255) . substr($s, $headerPos, $delimPos);
 
                         // this is the original signing string which seems to have only worked for key lengths of 1024 or less
-                        $pkt = chr(0x99).chr($len >> 8).chr($len & 255).substr($s, $k, $len); // use this for now
+                        $pkt = chr(0x99) . chr($len >> 8) . chr($len & 255) . substr($s, $k, $len); // use this for now
 
                         $fp = sha1($pkt);
                         $this->fp = $fp;
@@ -250,7 +233,7 @@ class PublicKey
 // 							echo "LENGTH=" . $headerPos . '->' . $ii . " CHR(" . ord(substr($s,$ii, 1)) . ") = " . substr($fp, strlen($fp) - 16, 16) . "\n";
 // 						}
                     } else {
-                        throw new Exception('GPG Key Version '.$version.' is not supported');
+                        throw new Exception('GPG Key Version ' . $version . ' is not supported');
                     }
                     $found = 2;
                 } elseif (($algo == 16 || $algo == 20) && $version == 4) {
@@ -267,9 +250,9 @@ class PublicKey
 
                     $this->public_key = base64_encode(substr($s, $m, $lp + $lg + $ly + 6));
 
-                        // TODO: should this be adjusted as it was for RSA (above)..?
+                    // TODO: should this be adjusted as it was for RSA (above)..?
 
-                        $pkt = chr(0x99).chr($len >> 8).chr($len & 255).substr($s, $k, $len);
+                    $pkt = chr(0x99) . chr($len >> 8) . chr($len & 255) . substr($s, $k, $len);
                     $fp = sha1($pkt);
                     $this->fp = $fp;
                     $this->key_id = substr($fp, strlen($fp) - 16, 16);
@@ -288,19 +271,11 @@ class PublicKey
 
         if ($found < 2) {
             throw new Exception('Unable to parse Public Key');
-// 			$this->version = "";
-// 			$this->fp = "";
-// 			$this->key_id = "";
-// 			$this->user = "";
-// 			$this->public_key = "";
         }
     }
 
-    /**
-     *
-     */
-    public function GetExpandedKey()
+    public function getExpandedKey()
     {
-        $ek = new ExpandedKey($this->public_key);
+        return new ExpandedKey($this->public_key);
     }
 }

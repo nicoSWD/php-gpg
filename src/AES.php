@@ -2,32 +2,19 @@
 
 namespace Certly\GPG;
 
-/**
- * Class AES.
- */
 class AES
 {
     /**
      * @param $block
      * @param $ctx
-     *
      * @return array
      */
     public static function encrypt($block, $ctx)
     {
-        $RCON = Cipher::$RCON;
-        $S = Cipher::$S;
-
         $T1 = Cipher::$T1;
         $T2 = Cipher::$T2;
         $T3 = Cipher::$T3;
         $T4 = Cipher::$T4;
-
-        $r = 0;
-        $t0 = 0;
-        $t1 = 0;
-        $t2 = 0;
-        $t3 = 0;
 
         $b = Utility::pack_octets($block);
         $rounds = $ctx->rounds;

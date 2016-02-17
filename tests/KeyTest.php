@@ -1,11 +1,7 @@
 <?php
 
-use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
-/**
- * Class KeyTest.
- */
 class KeyTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -106,35 +102,26 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
 -----END PGP PUBLIC KEY BLOCK-----';
     }
 
-    /**
-     *
-     */
     public function test_VerifyGnuPGKey()
     {
         // jason's public key
         $public_key_ascii = $this->getGnuPGTestKey();
 
-        $gpg = new GPG();
         $pub_key = new PublicKey($public_key_ascii);
 
-        $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
-        $this->assertEquals('47009B66424E9476', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');
+        $this->assertEquals(PK_TYPE_RSA, $pub_key->getKeyType(), 'OpenPGP Incorrect Key Type');
+        $this->assertEquals('47009B66424E9476', $pub_key->getKeyId(), 'OpenPGP Incorrect Key ID');
         $this->assertEquals('ED4F E89E 38A3 7833 3CD4 D6FA 4700 9B66 424E 9476', $pub_key->GetFingerprint(), 'OpenPGP Incorrect Fingerprint');
     }
 
-    /**
-     *
-     */
     public function test_VerifyOpenPGPKey2()
     {
         // OpenPGP Test Key
         $public_key_ascii = $this->getOpenPGPTestKey2();
-
-        $gpg = new GPG();
         $pub_key = new PublicKey($public_key_ascii);
 
-        $this->assertEquals(PK_TYPE_RSA, $pub_key->GetKeyType(), 'OpenPGP Incorrect Key Type');
-        $this->assertEquals('C87538697986219A', $pub_key->GetKeyId(), 'OpenPGP Incorrect Key ID');
+        $this->assertEquals(PK_TYPE_RSA, $pub_key->getKeyType(), 'OpenPGP Incorrect Key Type');
+        $this->assertEquals('C87538697986219A', $pub_key->getKeyId(), 'OpenPGP Incorrect Key ID');
         $this->assertEquals('3C05 9D07 C624 84A4 EF2D 3651 C875 3869 7986 219A', $pub_key->GetFingerprint(), 'OpenPGP Incorrect Fingerprint');
     }
 }

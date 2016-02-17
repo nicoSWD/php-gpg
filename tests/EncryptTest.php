@@ -3,9 +3,6 @@
 use Certly\GPG\GPG;
 use Certly\GPG\PublicKey;
 
-/**
- * Class EncryptTest.
- */
 class EncryptTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -14,7 +11,7 @@ class EncryptTest extends PHPUnit_Framework_TestCase
     public function getTestKey()
     {
         return '-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG C# v1.6.1.0
+Version: GnuPG v1
 
 mQENBFaKdnIBCACIVyq6yXMOyVygLLMQAc+xom2Mq/Ii0vRm8bh58iOI1kghhxe+
 wGDU9FSWEG+msARTUZYYn6iPJLXxTj41i6XdcXdhZai93DR9/fUFGjbbJII6nQ8r
@@ -32,15 +29,13 @@ RtMRSAL/PdpISDpv0WgQzbjnlxZmRvCvwAxXnXl4Pa2A
 -----END PGP PUBLIC KEY BLOCK-----';
     }
 
-    /**
-     *
-     */
     public function test_Encrypt()
     {
         $public_key_ascii = $this->getTestKey();
         $gpg = new GPG();
         $pub_key = new PublicKey($public_key_ascii);
         $encrypted = $gpg->encrypt($pub_key, 'ABCDEF');
+
         $this->assertContains('-----BEGIN PGP MESSAGE-----', $encrypted);
         $this->assertContains('-----END PGP MESSAGE-----', $encrypted);
     }

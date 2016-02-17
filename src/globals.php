@@ -2,7 +2,6 @@
 
 use Certly\GPG\BDiv;
 
-/* assign globals */
 global $bs;
 global $bx2;
 global $bm;
@@ -19,17 +18,11 @@ $bdm = (1 << $bd) - 1;
 
 /**
  * @param $s
- *
  * @return array|int
  */
 function mpi2b($s)
 {
-    global $bs;
-    global $bx2;
     global $bm;
-    global $bx;
-    global $bd;
-    global $bdm;
 
     $bn = 1;
     $r = [0];
@@ -37,17 +30,15 @@ function mpi2b($s)
     $sb = 256;
     $c = 0;
     $sn = strlen($s);
-    if ($sn < 2) {
-        echo 'string too short, not a MPI';
 
+    if ($sn < 2) {
         return 0;
     }
 
     $len = ($sn - 2) * 8;
     $bits = ord($s[0]) * 256 + ord($s[1]);
-    if ($bits > $len || $bits < $len - 8) {
-        echo "not a MPI, bits = $bits, len = $len";
 
+    if ($bits > $len || $bits < $len - 8) {
         return 0;
     }
 
@@ -71,17 +62,12 @@ function mpi2b($s)
 
 /**
  * @param $b
- *
  * @return string
  */
 function b2mpi($b)
 {
     global $bs;
-    global $bx2;
     global $bm;
-    global $bx;
-    global $bd;
-    global $bdm;
 
     $bn = 1;
     $bc = 0;
@@ -89,7 +75,6 @@ function b2mpi($b)
     $rb = 1;
     $rn = 0;
     $bits = count($b) * $bs;
-    $n = 0;
     $rr = '';
 
     for ($n = 0; $n < $bits; $n++) {
@@ -118,7 +103,7 @@ function b2mpi($b)
     }
     $bits += $rn * 8;
 
-    $rr .= chr($bits / 256).chr($bits % 256);
+    $rr .= chr($bits / 256) . chr($bits % 256);
     if ($bits) {
         for ($n = $rn; $n >= 0; $n--) {
             $rr .= chr($r[$n]);
@@ -132,22 +117,14 @@ function b2mpi($b)
  * @param $xx
  * @param $y
  * @param $m
- *
  * @return array
  */
 function bmodexp($xx, $y, $m)
 {
     global $bs;
-    global $bx2;
-    global $bm;
-    global $bx;
-    global $bd;
-    global $bdm;
 
     $r = [1];
-    $an = 0;
-    $a = 0;
-    $x = array_merge((array) $xx);
+    $x = array_merge((array)$xx);
     $n = count($m) * 2;
     $mu = array_fill(0, $n + 1, 0);
 
@@ -173,13 +150,15 @@ function bmodexp($xx, $y, $m)
 /**
  * @param $i
  * @param $m
- *
  * @return int
  */
 function simplemod($i, $m) // returns the mod where m < 2^bd
 {
+    global $bd;
+    global $bdm;
+
     $c = 0;
-    $v = 0;
+
     for ($n = count($i) - 1; $n >= 0; $n--) {
         $v = $i[$n];
         $c = (($v >> $bd) + ($c << $bd)) % $m;
@@ -192,7 +171,6 @@ function simplemod($i, $m) // returns the mod where m < 2^bd
 /**
  * @param $p
  * @param $m
- *
  * @return array
  */
 function bmod($p, $m) // binary modulo
@@ -217,7 +195,6 @@ function bmod($p, $m) // binary modulo
  * @param $x
  * @param $m
  * @param $mu
- *
  * @return array
  */
 function bmod2($x, $m, $mu)
@@ -229,7 +206,6 @@ function bmod2($x, $m, $mu)
 
     $ml1 = count($m) + 1;
     $ml2 = count($m) - 1;
-    $rr = 0;
 
     $q3 = array_slice(bmul(array_slice($x, $ml2), $mu), $ml1);
     $r1 = array_slice($x, 0, $ml1);
@@ -258,7 +234,6 @@ function bmod2($x, $m, $mu)
  * @param $x
  * @param $start
  * @param $len
- *
  * @return int
  */
 function toppart($x, $start, $len)
@@ -275,7 +250,6 @@ function toppart($x, $start, $len)
 
 /**
  * @param $n
- *
  * @return array
  */
 function zeros($n)
@@ -291,17 +265,12 @@ function zeros($n)
 /**
  * @param $a
  * @param $b
- *
  * @return array
  */
 function bsub($a, $b)
 {
     global $bs;
-    global $bx2;
     global $bm;
-    global $bx;
-    global $bd;
-    global $bdm;
 
     $al = count($a);
     $bl = count($b);
@@ -348,32 +317,18 @@ function bsub($a, $b)
 /**
  * @param $a
  * @param $b
- *
  * @return array
  */
 function bmul($a, $b)
 {
     global $bs;
-    global $bx2;
     global $bm;
-    global $bx;
     global $bd;
     global $bdm;
 
-    $b = array_merge((array) $b, [0]);
+    $b = array_merge((array)$b, [0]);
     $al = count($a);
     $bl = count($b);
-    $n = 0;
-    $nn = 0;
-    $aa = 0;
-    $c = 0;
-    $m = 0;
-    $g = 0;
-    $gg = 0;
-    $h = 0;
-    $hh = 0;
-    $ghh = 0;
-    $ghhb = 0;
 
     $r = zeros($al + $bl + 1);
 
@@ -411,7 +366,6 @@ function bmul($a, $b)
 
 /**
  * @param $string
- *
  * @return int
  */
 function safeStrlen($string)

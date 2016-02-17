@@ -2,15 +2,13 @@
 
 namespace Certly\GPG;
 
-/**
- * Class ExpandedKey.
- */
 class ExpandedKey
 {
     /**
      * @var int
      */
     public $rounds;
+
     /**
      * @var array
      */
@@ -22,8 +20,6 @@ class ExpandedKey
     public $key;
 
     /**
-     * ExpandedKey constructor.
-     *
      * @param $key
      */
     public function __construct($key)
@@ -35,12 +31,6 @@ class ExpandedKey
         $maxkc = Cipher::$maxkc;
         $maxrk = Cipher::$maxrk;
 
-        $kc = 0;
-        $i = 0;
-        $j = 0;
-        $r = 0;
-        $t = 0;
-        $rounds = 0;
         $keySched = array_fill(0, $maxrk + 1, 0);
         $keylen = strlen($key);
         $k = array_fill(0, $maxkc, 0);
@@ -66,7 +56,7 @@ class ExpandedKey
         for ($i = 0, $j = 0; $j < $keylen; $j++, $i += 4) {
             if ($i < $keylen) {
                 $k[$j] = ord($key[$i]) | (ord($key[$i + 1]) << 0x8) |
-                        (ord($key[$i + 2]) << 0x10) | (ord($key[$i + 3]) << 0x18);
+                    (ord($key[$i + 2]) << 0x10) | (ord($key[$i + 3]) << 0x18);
             } else {
                 $k[$j] = 0;
             }
@@ -77,10 +67,12 @@ class ExpandedKey
 
         $r = 0;
         $t = 0;
+
         for ($j = 0; ($j < $kc) && ($r < $rounds + 1);) {
             for (; ($j < $kc) && ($t < 4); $j++, $t++) {
                 $keySched[$r][$t] = $tk[$j];
             }
+
             if ($t == 4) {
                 $r++;
                 $t = 0;

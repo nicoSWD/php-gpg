@@ -2,15 +2,11 @@
 
 namespace Certly\GPG;
 
-/**
- * Class Utility.
- */
 class Utility
 {
     /**
      * @param $haystack
      * @param $needle
-     *
      * @return bool
      */
     public static function starts_with($haystack, $needle)
@@ -20,7 +16,6 @@ class Utility
 
     /**
      * @param $x
-     *
      * @return int
      */
     public static function B0($x)
@@ -30,7 +25,6 @@ class Utility
 
     /**
      * @param $x
-     *
      * @return int
      */
     public static function B1($x)
@@ -40,7 +34,6 @@ class Utility
 
     /**
      * @param $x
-     *
      * @return int
      */
     public static function B2($x)
@@ -50,7 +43,6 @@ class Utility
 
     /**
      * @param $x
-     *
      * @return int
      */
     public static function B3($x)
@@ -61,14 +53,13 @@ class Utility
     /**
      * @param $x
      * @param $s
-     *
      * @return int
      */
     public static function zshift($x, $s)
     {
         $res = $x >> $s;
-
         $pad = 0;
+
         for ($i = 0; $i < 32 - $s; $i++) {
             $pad += (1 << $i);
         }
@@ -78,13 +69,10 @@ class Utility
 
     /**
      * @param $octets
-     *
      * @return array|void
      */
     public static function pack_octets($octets)
     {
-        $i = 0;
-        $j = 0;
         $len = count($octets);
         $b = array_fill(0, $len / 4, 0);
 
@@ -101,12 +89,10 @@ class Utility
 
     /**
      * @param $packed
-     *
      * @return array
      */
     public static function unpack_octets($packed)
     {
-        $j = 0;
         $i = 0;
         $l = count($packed);
         $r = array_fill(0, $l * 4, 0);
@@ -123,7 +109,6 @@ class Utility
 
     /**
      * @param $h
-     *
      * @return string
      */
     public static function hex2bin($h)
@@ -142,7 +127,6 @@ class Utility
 
     /**
      * @param $data
-     *
      * @return string
      */
     public static function crc24($data)
@@ -159,28 +143,26 @@ class Utility
             }
         }
 
-        return
-            chr(($crc >> 0x10) & 0xff).
-            chr(($crc >> 0x8) & 0xff).
-            chr($crc & 0xff);
+        return chr(($crc >> 0x10) & 0xff) . chr(($crc >> 0x8) & 0xff) . chr($crc & 0xff);
     }
 
     /**
      * @param $len
      * @param $textmode
-     *
      * @return string
      */
     public static function s_random($len, $textmode)
     {
         $r = '';
+
         for ($i = 0; $i < $len;) {
             $t = random_int(0, 0xff);
+
             if ($t == 0 && $textmode) {
                 continue;
             }
-            $i++;
 
+            $i++;
             $r .= chr($t);
         }
 

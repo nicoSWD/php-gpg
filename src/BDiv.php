@@ -2,9 +2,6 @@
 
 namespace Certly\GPG;
 
-/**
- * Class BDiv.
- */
 class BDiv
 {
     /**
@@ -25,11 +22,7 @@ class BDiv
     public function __construct($x, $y)
     {
         global $bs;
-        global $bx2;
         global $bm;
-        global $bx;
-        global $bd;
-        global $bdm;
 
         $n = count($x) - 1;
         $t = count($y) - 1;
@@ -44,7 +37,6 @@ class BDiv
 
         if ($n == $t && toppart($x, $t, 2) / toppart($y, $t, 2) < 4) {
             $qq = 0;
-            $xx = 0;
             for (; ;) {
                 $xx = bsub($x, $y);
                 if (count($xx) == 0) {
@@ -78,9 +70,6 @@ class BDiv
             $x[0] = ($x[0] << $shift) & $bm;
         }
 
-        $i = 0;
-        $j = 0;
-        $x2 = 0;
         $q = zeros($nmt + 1);
         $y2 = array_merge(zeros($nmt), (array) $y);
         for (; ;) {
