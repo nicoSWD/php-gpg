@@ -15,6 +15,37 @@ class GPG
     private $version = '1.0.0';
 
     /**
+     * @param PublicKey $pk
+     * @param string    $plaintext
+     * @param null      $versionHeader
+     * @return string
+     */
+    public function encrypt(PublicKey $pk, $plaintext, $versionHeader = null)
+    {
+        $key_id = $pk->getKeyId();
+        $public_key = $pk->getPublicKey();
+
+        $session_key = Utility::s_random($this->width, 0);
+        $key_id = Utility::hex2bin($key_id);
+        $cp = $this->gpgSession($key_id, $session_key, $public_key) . $this->gpgData($session_key, $plaintext);
+
+        $code = base64_encode($cp);
+        $code = wordwrap($code, 64, "\n", 1);
+
+        if ($versionHeader === null) {
+            $versionHeader = 'Version: PHP-GPG v' . $this->version . "\n\n";
+        } elseif (safeStrlen($versionHeader) > 0) {
+            $versionHeader = 'Version: ' . $versionHeader . "\n\n";
+        }
+
+        return
+            "-----BEGIN PGP MESSAGE-----\n" .
+            $versionHeader .
+            $code . "\n=" . base64_encode(Utility::crc24($cp)) .
+            "\n-----END PGP MESSAGE-----\n";
+    }
+
+    /**
      * @param $key
      * @param $text
      * @return string
@@ -148,36 +179,5 @@ class GPG
         $enc = $this->gpgEncrypt($key, $prefix . $this->gpgLiteral($text) . $mdc);
 
         return chr(0x12 | 0xC0) . chr(255) . $this->writeNumber(1 + strlen($enc), 4) . chr(1) . $enc;
-    }
-
-    /**
-     * @param PublicKey $pk
-     * @param string    $plaintext
-     * @param null      $versionHeader
-     * @return string
-     */
-    public function encrypt(PublicKey $pk, $plaintext, $versionHeader = null)
-    {
-        $key_id = $pk->getKeyId();
-        $public_key = $pk->getPublicKey();
-
-        $session_key = Utility::s_random($this->width, 0);
-        $key_id = Utility::hex2bin($key_id);
-        $cp = $this->gpgSession($key_id, $session_key, $public_key) . $this->gpgData($session_key, $plaintext);
-
-        $code = base64_encode($cp);
-        $code = wordwrap($code, 64, "\n", 1);
-
-        if ($versionHeader === null) {
-            $versionHeader = 'Version: PHP-GPG v' . $this->version . "\n\n";
-        } elseif (safeStrlen($versionHeader) > 0) {
-            $versionHeader = 'Version: ' . $versionHeader . "\n\n";
-        }
-
-        return
-            "-----BEGIN PGP MESSAGE-----\n" .
-            $versionHeader .
-            $code . "\n=" . base64_encode(Utility::crc24($cp)) .
-            "\n-----END PGP MESSAGE-----\n";
     }
 }
