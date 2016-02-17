@@ -1,8 +1,6 @@
 php-gpg
 =======
-[![Build Status](https://travis-ci.org/iangcarroll/php-gpg.svg?branch=master)](https://travis-ci.org/iangcarroll/php-gpg) [Documentation](http://certly-php-gpg.s3-website-us-east-1.amazonaws.com)
-
-This is a fork of the php-gpg project, which has code quality (and partially due to this, security) issues. It can perform basic operations that are compatible with the PGP standard.
+This is a fork of the fork because everything still sucks.
 
 Features/Limitations
 --------------------
@@ -16,8 +14,8 @@ Usage
 ```php
 require 'vendor/autoload.php';
 
-$gpg = new Certly\GPG\GPG();
-$pubKey = new Certly\GPG\PublicKey($aPublicKey);
+$gpg = new nicoSWD\GPG\GPG();
+$pubKey = new nicoSWD\GPG\PublicKey($aPublicKey);
 
-echo $gpg->encrypt($pubKey,"ABCDEFGHIJKL");
+echo $gpg->encrypt($pubKey, 'ABCDEFGHIJKL');
 ```

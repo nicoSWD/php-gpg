@@ -1,7 +1,7 @@
 <?php
 
-use Certly\GPG\GPG;
-use Certly\GPG\PublicKey;
+use nicoSWD\GPG\GPG;
+use nicoSWD\GPG\PublicKey;
 
 class EncryptTest extends PHPUnit_Framework_TestCase
 {

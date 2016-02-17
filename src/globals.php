@@ -1,6 +1,6 @@
 <?php
 
-use Certly\GPG\BDiv;
+use nicoSWD\GPG\BDiv;
 
 global $bs;
 global $bx2;

@@ -1,12 +1,15 @@
 {
-    "name": "certly/gpg",
+    "name": "nicoswd/php-gpg",
     "description": "Pure PHP GPG implementation, forked from php-gpg.",
     "type": "library",
-    "keywords": ["gpg"],
+    "keywords": ["gpg", "pgp"],
     "license": "GPL",
     "authors": [
         {
         "name": "Jason Hinkle"
+        },
+        {
+        "name": "Nicolas Oelgart"
         },
         {
         "name": "Ian Carroll"
@@ -14,7 +17,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Certly\\GPG\\": "src"
+            "nicoSWD\\GPG\\": "src"
         },
         "files": ["src/globals.php"]
     },

@@ -1,6 +1,6 @@
 <?php
 
-use Certly\GPG\PublicKey;
+use nicoSWD\GPG\PublicKey;
 
 class KeyTest extends PHPUnit_Framework_TestCase
 {
