@@ -3,7 +3,7 @@
     "description": "Pure PHP GPG implementation, forked from php-gpg.",
     "type": "library",
     "keywords": ["gpg", "pgp"],
-    "license": "GPL",
+    "license": "GPL-1.0+",
     "authors": [
         {
         "name": "Jason Hinkle"
