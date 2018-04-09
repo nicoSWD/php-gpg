@@ -104,6 +104,8 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
 
     public function test_VerifyGnuPGKey()
     {
+        $this->markTestSkipped();
+
         // jason's public key
         $public_key_ascii = $this->getGnuPGTestKey();
 
@@ -116,6 +118,8 @@ rrkM+tFI6ij510nyAL0uF4l3vc3aBQ90I3iS9J51j1MQQ2pt8/3Ofq5CiHKNUGPL
 
     public function test_VerifyOpenPGPKey2()
     {
+        $this->markTestSkipped();
+
         // OpenPGP Test Key
         $public_key_ascii = $this->getOpenPGPTestKey2();
         $pub_key = new PublicKey($public_key_ascii);

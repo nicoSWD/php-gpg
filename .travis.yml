@@ -2,7 +2,8 @@ language: php
 install:
   - composer install --dev
 php:
-  - '5.6'
   - '7.0'
+  - '7.1'
+  - '7.2'
   - hhvm
   - nightly
